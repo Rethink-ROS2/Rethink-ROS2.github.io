@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rethink ROS 2</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #c8001a;
+      --blue: #2980b9;
+      --bg: #fcfcfc;
+      --bg2: #f3f6f6;
+      --border: #e1e4e5;
+      --text: #404040;
+      --muted: #777777;
+      --img-bg: #e9ecec;
+    }
+
+
+    body {
+      font-family: Lato, proxima-nova, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero {
+      padding: 2rem 4rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+    }
+
+    .hero-text { flex: 1; min-width: 0; }
+
+    .hero h2 {
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      white-space: nowrap;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .hero img {
+      height: 240px;
+      width: auto;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      padding: 0 4rem;
+      flex: 1;
+    }
+
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .card:hover {
+      border-color: var(--red);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 3 / 1;
+      background: var(--img-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .card-img::after {
+      content: '';
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .card-img .img-accent {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--red);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .card:hover .img-accent { opacity: 1; }
+
+    .card-body {
+      padding: 1.25rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+    }
+
+    .card-body h3 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .card-body p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .card-link {
+      margin-top: 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .learn-more {
+      color: var(--blue);
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: inherit;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: inherit;
+    }
+
+    footer {
+      padding: 2.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p { font-size: 0.8rem; color: var(--muted); }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.15s;
+    }
+
+    footer a:hover { color: var(--text); }
+
+    .disclaimer {
+      padding: 1.5rem 4rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    .disclaimer p {
+      font-size: 0.875rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .gh-icon { width: 16px; height: 16px; fill: currentColor; }
+
+    @media (max-width: 700px) {
+      .hero, .cards, footer, .disclaimer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .hero { flex-direction: column; gap: 2rem; padding-top: 2.5rem; }
+      .hero img { height: 160px; }
+      .cards { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h2>ROS 2 SDKs for Baxter and Sawyer.</h2>
+      <p>Community-maintained software development kits for Rethink Robotics platforms, ported to ROS 2. <button class="learn-more" onclick="document.getElementById('disclaimer').scrollIntoView({behavior:'smooth'})">Learn more</button></p>
+    </div>
+    <img src="assets/ProjectLogo.png" alt="Baxter and Sawyer robots with ROS 2 logo" />
+  </section>
+
+  <div class="cards">
+    <a class="card" href="https://github.com/Rethink-ROS2/BaxterSDK">
+      <div class="card-img">
+        <div class="img-accent"></div>
+      </div>
+      <div class="card-body">
+        <h3>Baxter SDK</h3>
+        <p>ROS 2 interface, MoveIt, etc.</p>
+        <div class="card-link">GitHub &#8594;</div>
+      </div>
+    </a>
+    <a class="card" href="https://github.com/Rethink-ROS2/SawyerSDK">
+      <div class="card-img">
+        <div class="img-accent"></div>
+      </div>
+      <div class="card-body">
+        <h3>Sawyer SDK</h3>
+        <p>ROS 2 interface, MoveIt, etc.</p>
+        <div class="card-link">GitHub &#8594;</div>
+      </div>
+    </a>
+  </div>
+
+  <section class="disclaimer" id="disclaimer">
+    <span class="disclaimer-label">Notice</span>
+    <p>This is an independent, community-maintained project. It is not affiliated with, endorsed by, or associated with Rethink Robotics GmbH, the Hahn Group, or any of their subsidiaries. Baxter and Sawyer are trademarks of their respective owners. This software is provided without warranty of any kind. Contributors make no guarantees regarding fitness for a particular purpose, safety, or regulatory compliance.</p>
+  </section>
+
+  <footer>
+    <p>Rethink ROS 2</p>
+    <a href="https://github.com/Rethink-ROS2">
+      <svg class="gh-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+      </svg>
+      Rethink-ROS2
+    </a>
+  </footer>
+
+</body>
+</html>
