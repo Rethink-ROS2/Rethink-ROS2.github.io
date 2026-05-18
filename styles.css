@@ -33,12 +33,15 @@ body {
 .hero-text { flex: 1; min-width: 0; }
 
 .hero h2 {
-  font-size: clamp(1.6rem, 4.5vw, 3.25rem);
   font-weight: 900;
   letter-spacing: -0.025em;
   line-height: 1.1;
   margin-bottom: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
 }
+
+.nowrap { white-space: nowrap; }
 
 .hero p {
   font-size: 1rem;
@@ -89,6 +92,15 @@ body {
   justify-content: center;
   border-bottom: 1px solid var(--border);
   position: relative;
+  overflow: hidden;
+}
+
+.card-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .card-img .img-accent {
@@ -230,8 +242,6 @@ footer a:hover { color: var(--text); }
   footer { padding-left: 2rem; padding-right: 2rem; }
 
   .hero { gap: 2.5rem; padding-top: 2rem; }
-
-  .hero h2 { font-size: clamp(1.6rem, 3.5vw, 2.25rem); }
 }
 
 /* ── Mobile (≤ 600px) ── */
